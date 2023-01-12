@@ -3,7 +3,6 @@ pragma solidity ^0.4.17;
 contract AdattaroloFactory {
     address[] public szervizek;
     address[] public jarmuvek;
-    address[] public szervizEsemenyek;
 
     function createSzerviz() public {
         address newSzerviz = new Szerviz(msg.sender);
@@ -15,21 +14,12 @@ contract AdattaroloFactory {
         jarmuvek.push(newJarmu);
     }
 
-    function createSzervizEsemeny(uint jarmuAzon, uint szervizAzon, uint vegosszeg) public {
-        address newSzervizEsemeny = new SzervizEsemeny(jarmuAzon, szervizAzon, vegosszeg);
-        szervizEsemenyek.push(newSzervizEsemeny);
-    }
-
     function getSzervizek() public view returns (address[]) {
         return szervizek;
     }
 
     function getJarmuvek() public view returns (address[]) {
         return jarmuvek;
-    }
-
-    function getSzervizEsemenyek() public view returns (address[]) {
-        return szervizEsemenyek;
     }
 }
 
@@ -47,11 +37,18 @@ contract Szerviz {
 }
 
 contract Jarmu {
+    struct SzervizEsemeny {
+        uint SzervizId;
+        uint Vegosszeg;
+    }
+
     string public Id;
     string public Gyarto;
     uint public Evjarat;
     string public Uzemanyag;
     address public Tulajdonos;
+    SzervizEsemeny[] public Szervizesemenyek;
+
 
     function Jarmu(address owner, string azonosito) public {
         Tulajdonos = owner;
@@ -69,16 +66,24 @@ contract Jarmu {
     function setUzemanyag(string ujUzemanyag) public {
         Uzemanyag = ujUzemanyag;
     }
-}
 
-contract SzervizEsemeny {
-    uint public JarmuId;
-    uint public SzervizId;
-    uint public Osszeg;
+    function addSzervizesemeny(uint szervizId, uint osszeg) public {
+        SzervizEsemeny memory szervizEsemeny = SzervizEsemeny({
+        SzervizId: szervizId,
+        Vegosszeg: osszeg
+        });
 
-    function SzervizEsemeny(uint jarmuAzon, uint szervizAzon, uint vegosszeg) public {
-        JarmuId = jarmuAzon;
-        SzervizId = szervizAzon;
-        Osszeg = vegosszeg;
+        Szervizesemenyek.push(szervizEsemeny);
+    }
+
+    function getSummary() public view returns (string , string, uint, string, address, SzervizEsemeny[]) {
+        return (
+        Id,
+        Gyarto,
+        Evjarat,
+        Uzemanyag,
+        Tulajdonos,
+        Szervizesemenyek
+        );
     }
 }
