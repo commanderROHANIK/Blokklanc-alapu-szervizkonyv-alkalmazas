@@ -4,17 +4,17 @@ import {Card, Button} from "semantic-ui-react";
 import Layout from "../components/Layout";
 import {Link} from "../routes";
 
-class CampaignIndex extends Component {
+class SzervizkonyvIndex extends Component {
     static async getInitialProps() {
-        const campaigns = await factory.methods.getSzervizek().call();
-        return {campaigns};
+        const vheicles = await factory.methods.getJarmuvek().call();
+        return {vheicles};
     }
 
-    renderCampaigns() {
-        const items = this.props.campaigns.map(address => {
+    renderVheicles() {
+        const items = this.props.vheicles.map(address => {
             return {
                 header: address,
-                description: <a>View Campaign</a>,
+                description: <a>View Vheicle</a>,
                 fluid: true
             }
         });
@@ -25,10 +25,10 @@ class CampaignIndex extends Component {
     render() {
         return (
             <Layout>
-                {this.renderCampaigns()}
+                {this.renderVheicles()}
             </Layout>
         );
     }
 }
 
-export default CampaignIndex;
+export default SzervizkonyvIndex;
