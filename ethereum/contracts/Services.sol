@@ -34,6 +34,13 @@ contract Szerviz {
     function setCim(string ujCim) public {
         Cim = ujCim;
     }
+
+    function getSummary() public view returns (address, string) {
+        return (
+        Manager,
+        Cim
+        );
+    }
 }
 
 contract Jarmu {

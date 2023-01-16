@@ -7,14 +7,35 @@ import {Link} from "../routes";
 class SzervizkonyvIndex extends Component {
     static async getInitialProps() {
         const vheicles = await factory.methods.getJarmuvek().call();
-        return {vheicles};
+        const services = await factory.methods.getSzervizek().call();
+        return {vheicles, services};
     }
 
     renderVheicles() {
         const items = this.props.vheicles.map(address => {
             return {
                 header: address,
-                description: <a>View Vheicle</a>,
+                description: (
+                    <Link route={`/vheicles/${address}`}>
+                        <a>View Vheicle</a>
+                    </Link>
+                ),
+                fluid: true
+            }
+        });
+
+        return <Card.Group items={items}/>
+    }
+
+    renderServices() {
+        const items = this.props.services.map(address => {
+            return {
+                header: address,
+                description: (
+                    <Link route={`/services/${address}`}>
+                        <a>View Service center</a>
+                    </Link>
+                ),
                 fluid: true
             }
         });
@@ -25,7 +46,11 @@ class SzervizkonyvIndex extends Component {
     render() {
         return (
             <Layout>
+                <h3>Járművek:</h3>
                 {this.renderVheicles()}
+
+                <h3>Szervizek:</h3>
+                {this.renderServices()}
             </Layout>
         );
     }

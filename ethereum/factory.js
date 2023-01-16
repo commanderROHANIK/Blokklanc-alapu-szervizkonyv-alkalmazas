@@ -3,7 +3,7 @@ import AdattaroloFactory from './build/AdattaroloFactory.json';
 
 const instance = new web3.eth.Contract(
     JSON.parse(AdattaroloFactory.interface),
-    '0xA9F0D9ebc6b1C85194d613e5F62A67fC189b0974'
+    '0xfAB8B4fdDdaf0Ce37C3CB3340D9aAD6e45DEfD31'
 );
 
 export default instance;
