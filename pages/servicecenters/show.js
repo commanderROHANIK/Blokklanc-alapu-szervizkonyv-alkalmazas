@@ -27,13 +27,13 @@ class ServiceCenterShow extends Component {
             {
                 header: manager,
                 meta: 'Address of Manager',
-                description: "The manager created this vampaign nad can create a request to withdraw money",
+                description: "The owner of the service center",
                 style: {overflowWrap: 'break-word'}
             },
             {
                 header: cim,
-                meta: 'Minimum contribution (wei)',
-                description: 'You must contribute at least this much wei to become an approver'
+                meta: 'Location',
+                description: 'The location of the service center'
             }
         ];
 

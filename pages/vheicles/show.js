@@ -50,13 +50,14 @@ class VheicleShow extends Component {
             },
             {
                 header: uzemanyag,
-                meta: 'Minimum contribution (wei)',
-                description: 'You must contribute at least this much wei to become an approver'
+                meta: 'Fuel',
+                description: 'The correct type of fuel needed to power the vheicle'
             },
             {
                 header: tulajdonos,
-                meta: 'Minimum contribution (wei)',
-                description: 'You must contribute at least this much wei to become an approver'
+                meta: 'Owner',
+                description: 'The current owner of the vheicle',
+                style: {overflowWrap: 'break-word'}
             }
         ];
 
