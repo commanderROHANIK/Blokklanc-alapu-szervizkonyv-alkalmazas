@@ -16,11 +16,6 @@ export default () => {
                         Add service center
                     </a>
                 </Link>
-                <Link route="/servicelogs/new">
-                    <a className="item">
-                        Add service log
-                    </a>
-                </Link>
                 <Link route="/vheicles/new">
                     <a className="item">
                         Add vheicle
