@@ -11,6 +11,16 @@ export default () => {
                         <Icon name='home'/>
                     </a>
                 </Link>
+                <Link route="/servicecenters/listAll">
+                    <a className="item">
+                        List all service centers
+                    </a>
+                </Link>
+                <Link route="/vheicles/listAll">
+                    <a className="item">
+                        List all vheicles
+                    </a>
+                </Link>
                 <Link route="/servicecenters/new">
                     <a className="item">
                         Add service center
