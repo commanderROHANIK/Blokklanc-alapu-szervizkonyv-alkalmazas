@@ -9,8 +9,8 @@ contract AdattaroloFactory {
         szervizek.push(newSzerviz);
     }
 
-    function createJarmu(string azonosito) public {
-        address newJarmu = new Jarmu(msg.sender, azonosito);
+    function createJarmu(string azonosito, string ujGyarto, uint evjarat, string uzemanyag) public {
+        address newJarmu = new Jarmu(msg.sender, azonosito, ujGyarto, evjarat, uzemanyag);
         jarmuvek.push(newJarmu);
     }
 
@@ -46,6 +46,8 @@ contract Szerviz {
 contract Jarmu {
     struct SzervizEsemeny {
         uint SzervizId;
+        uint KilommeterOraAllas;
+        string Datum;
         uint Vegosszeg;
     }
 
@@ -57,27 +59,20 @@ contract Jarmu {
     SzervizEsemeny[] public Szervizesemenyek;
 
 
-    function Jarmu(address owner, string azonosito) public {
+    function Jarmu(address owner, string azonosito, string ujGyarto, uint evjarat, string uzemanyag) public {
         Tulajdonos = owner;
         Id = azonosito;
-    }
-
-    function setGyarto(string ujGyarto) public {
         Gyarto = ujGyarto;
+        Evjarat = evjarat;
+        Uzemanyag = uzemanyag;
     }
 
-    function setEvjarat(uint ujEvjarat) public {
-        Evjarat = ujEvjarat;
-    }
-
-    function setUzemanyag(string ujUzemanyag) public {
-        Uzemanyag = ujUzemanyag;
-    }
-
-    function addSzervizesemeny(uint szervizId, uint osszeg) public {
+    function addSzervizesemeny(uint szervizId, uint kilommeterOraAllas, string datum, uint vegosszeg) public {
         SzervizEsemeny memory szervizEsemeny = SzervizEsemeny({
         SzervizId: szervizId,
-        Vegosszeg: osszeg
+        KilommeterOraAllas: kilommeterOraAllas,
+        Datum: datum,
+        Vegosszeg: vegosszeg
         });
 
         Szervizesemenyek.push(szervizEsemeny);
