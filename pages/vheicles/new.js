@@ -3,6 +3,7 @@ import {Form, Button, Input, Message} from "semantic-ui-react";
 import factory from "../../ethereum/factory";
 import web3 from "../../ethereum/web3";
 import Layout from "../../components/Layout";
+import {Router} from "../../routes";
 
 class AddServiceCenter extends Component {
     state = {
@@ -29,6 +30,7 @@ class AddServiceCenter extends Component {
                 .send({
                     from: accounts[0]
                 });
+            Router.replaceRoute(`/`);
         } catch (err) {
             this.setState({errorMessage: err.message});
         }

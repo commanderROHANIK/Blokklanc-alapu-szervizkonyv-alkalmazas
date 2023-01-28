@@ -1,14 +1,27 @@
 import React, {Component} from "react";
 import Layout from '../../components/Layout';
 import Vheicle from "../../ethereum/vheicle";
-import {Card, Grid} from "semantic-ui-react";
-import web3 from "../../ethereum/web3";
+import {Card, Grid, Table} from "semantic-ui-react";
+import AddServiceLog from "../../components/AddServiceLog";
+import SzervizLogRow from "../../components/SzervizLogRow"
 
 class VheicleShow extends Component {
     static async getInitialProps(props) {
         const vheicle = Vheicle(props.query.address);
-
         const summary = await vheicle.methods.getSummary().call();
+        const count = await vheicle.methods.SzervizesemenyCount().call();
+        let szervizLogs = [];
+
+        if (count > 0) {
+            szervizLogs = await Promise.all(
+                Array(count).fill().map((element, index) => {
+                    return vheicle.methods.Szervizesemenyek(index).call();
+                })
+            );
+        }
+
+
+        console.log(summary);
 
         return {
             address: props.query.address,
@@ -17,7 +30,8 @@ class VheicleShow extends Component {
             evjarat: summary[2],
             uzemanyag: summary[3],
             tulajdonos: summary[4],
-            szervizesemenyek: summary[5]
+            SzervizesemenyCount: count,
+            SzervizEsemenyek: szervizLogs
         };
     }
 
@@ -28,7 +42,7 @@ class VheicleShow extends Component {
             evjarat,
             uzemanyag,
             tulajdonos,
-            szervizesemenyek
+            SzervizesemenyCount
         } = this.props;
 
         const items = [
@@ -64,14 +78,41 @@ class VheicleShow extends Component {
         return <Card.Group items={items}/>
     }
 
+    renderRows() {
+        return this.props.SzervizEsemenyek.map((szervizEsemeny, index) => {
+            return <SzervizLogRow
+                key={index}
+                szervizEsemeny={szervizEsemeny}
+            />;
+        });
+    }
+
     render() {
+        const {Header, Row, HeaderCell, Body} = Table;
+
         return (
             <Layout>
                 <Grid>
                     <Grid.Column width={10}>
                         {this.renderCards()}
                     </Grid.Column>
+                    <Grid.Column width={6}>
+                        <AddServiceLog address={this.props.address}/>
+                    </Grid.Column>
                 </Grid>
+                <Table>
+                    <Header>
+                        <Row>
+                            <HeaderCell>Szervíz azonosító</HeaderCell>
+                            <HeaderCell>Kilóméteróra állás</HeaderCell>
+                            <HeaderCell>Dátum</HeaderCell>
+                            <HeaderCell>Végösszeg</HeaderCell>
+                        </Row>
+                    </Header>
+                    <Body>
+                        {this.renderRows()}
+                    </Body>
+                </Table>
             </Layout>
         );
     }

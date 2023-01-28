@@ -57,6 +57,7 @@ contract Jarmu {
     string public Uzemanyag;
     address public Tulajdonos;
     SzervizEsemeny[] public Szervizesemenyek;
+    uint public SzervizesemenyCount;
 
 
     function Jarmu(address owner, string azonosito, string ujGyarto, uint evjarat, string uzemanyag) public {
@@ -65,6 +66,7 @@ contract Jarmu {
         Gyarto = ujGyarto;
         Evjarat = evjarat;
         Uzemanyag = uzemanyag;
+        SzervizesemenyCount = 0;
     }
 
     function addSzervizesemeny(uint szervizId, uint kilommeterOraAllas, string datum, uint vegosszeg) public {
@@ -76,16 +78,17 @@ contract Jarmu {
         });
 
         Szervizesemenyek.push(szervizEsemeny);
+        SzervizesemenyCount++;
     }
 
-    function getSummary() public view returns (string , string, uint, string, address, SzervizEsemeny[]) {
+    function getSummary() public view returns (string , string, uint, string, address, uint) {
         return (
         Id,
         Gyarto,
         Evjarat,
         Uzemanyag,
         Tulajdonos,
-        Szervizesemenyek
+        SzervizesemenyCount
         );
     }
 }
