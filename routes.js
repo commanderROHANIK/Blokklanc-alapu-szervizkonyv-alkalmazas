@@ -6,6 +6,7 @@ routes
     .add('/vheicles/new', 'vheicles/new')
     .add('/servicecenters/new', 'servicecenters/new')
     .add('/services/:address', '/servicecenters/show')
+    .add('/services/:address/modify', '/servicecenters/modify')
     .add('/vheicles/:address', '/vheicles/show');
 
 module.exports = routes;

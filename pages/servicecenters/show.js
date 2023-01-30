@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import Layout from '../../components/Layout';
 import ServiceCenter from "../../ethereum/serviceCenter";
-import {Card, Grid} from "semantic-ui-react";
-import web3 from "../../ethereum/web3";
+import {Button, Card, Grid} from "semantic-ui-react";
+import {Link} from "../../routes";
 
 class ServiceCenterShow extends Component {
     static async getInitialProps(props) {
@@ -13,14 +13,20 @@ class ServiceCenterShow extends Component {
         return {
             address: props.query.address,
             manager: summary[0],
-            cim: summary[1]
+            cim: summary[1],
+            gps: summary[2],
+            email: summary[3],
+            nyitvatartas: summary[4]
         };
     }
 
     renderCards() {
         const {
             manager,
-            cim
+            cim,
+            gps,
+            email,
+            nyitvatartas
         } = this.props;
 
         const items = [
@@ -34,6 +40,21 @@ class ServiceCenterShow extends Component {
                 header: cim,
                 meta: 'Location',
                 description: 'The location of the service center'
+            },
+            {
+                header: gps,
+                meta: 'GPS',
+                description: 'The GPS coordinates of the service center'
+            },
+            {
+                header: email,
+                meta: 'E-mail',
+                description: 'The e-mail address of the service center'
+            },
+            {
+                header: nyitvatartas,
+                meta: 'Open hours',
+                description: 'The time when the service center is open'
             }
         ];
 
@@ -48,6 +69,15 @@ class ServiceCenterShow extends Component {
                         {this.renderCards()}
                     </Grid.Column>
                 </Grid>
+                <Link route={`/services/${this.props.address}/modify`}>
+                    <a>
+                        <Button
+                            primary
+                            style={{marginTop: 10}}>
+                            Módosítás
+                        </Button>
+                    </a>
+                </Link>
             </Layout>
         );
     }
