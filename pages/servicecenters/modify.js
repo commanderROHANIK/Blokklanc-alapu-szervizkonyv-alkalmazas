@@ -1,18 +1,30 @@
 import React, {Component} from "react";
-import {Form, Button, Input, Message} from "semantic-ui-react";
-import factory from "../../ethereum/factory";
-import web3 from "../../ethereum/web3";
+import ServiceCenter from "../../ethereum/serviceCenter";
+import {Button, Form, Input, Message} from "semantic-ui-react";
 import Layout from "../../components/Layout";
+import web3 from "../../ethereum/web3";
 
-class AddServiceCenter extends Component {
+class ServiceCenterModify extends Component {
     state = {
-        cim: '',
-        gps: '',
-        email: '',
-        nyitvatartas: '',
+        cim: this.props.regitcim,
+        gps: this.props.regigps,
+        email: this.props.regiemail,
+        nyitvatartas: this.props.reginyitvatartas,
         errorMessage: '',
         loading: false
     };
+
+    static async getInitialProps(props) {
+        const serviceCenter = ServiceCenter(props.query.address);
+        const summery = await serviceCenter.methods.getSummary().call();
+
+        const regitcim = summery[1];
+        const regigps = summery[2];
+        const regiemail = summery[3];
+        const reginyitvatartas = summery[4];
+
+        return {serviceCenter, regitcim, regigps, regiemail, reginyitvatartas};
+    }
 
     onSubmit = async (event) => {
         event.preventDefault();
@@ -24,22 +36,35 @@ class AddServiceCenter extends Component {
 
         try {
             const accounts = await web3.eth.getAccounts();
-            await factory.methods
-                .createSzerviz(
-                    this.state.cim,
-                    this.state.gps,
-                    this.state.email,
-                    this.state.nyitvatartas
-                )
-                .send({
-                    from: accounts[0]
-                });
+            let tmp_array = [];
+
+            if(this.state.cim !== this.props.regitcim) {
+                tmp_array.push(this.props.serviceCenter.methods.setCim(this.state.cim));
+            }
+
+            if(this.state.gps !== this.props.regigps) {
+                tmp_array.push(this.props.serviceCenter.methods.setGPS(this.state.gps));
+            }
+
+            if(this.state.email !== this.props.regiemail) {
+                tmp_array.push(this.props.serviceCenter.methods.setEmail(this.state.email));
+            }
+
+            if(this.state.nyitvatartas !== this.props.reginyitvatartas) {
+                tmp_array.push(this.props.serviceCenter.methods.setNyitvatartas(this.state.nyitvatartas));
+            }
+
+            await Promise.all(tmp_array.map(x => x.send(
+                {from: accounts[0]}
+            )));
+
         } catch (err) {
             this.setState({errorMessage: err.message});
         }
 
         this.setState({loading: false});
-    }
+    };
+
     render() {
         return (
             <Layout>
@@ -70,15 +95,15 @@ class AddServiceCenter extends Component {
                                 this.setState({nyitvatartas: event.target.value})}
                         />
                     </Form.Field>
-                    <Message error header="Oops!" content={this.state.errorMessage} />
+                    <Message error header="Oops!" content={this.state.errorMessage}/>
                     <Button
                         loading={this.state.loading}
                         primary
-                    >Add</Button>
+                    >Mentés</Button>
                 </Form>
             </Layout>
-        )
+        );
     }
 }
 
-export default AddServiceCenter;
+export default ServiceCenterModify;
