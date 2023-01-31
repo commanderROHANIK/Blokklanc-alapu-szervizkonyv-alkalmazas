@@ -1,9 +1,10 @@
 import React, {Component} from "react";
 import Layout from '../../components/Layout';
 import Vheicle from "../../ethereum/vheicle";
-import {Card, Grid, Table} from "semantic-ui-react";
+import {Button, Card, Grid, Table} from "semantic-ui-react";
 import AddServiceLog from "../../components/AddServiceLog";
 import SzervizLogRow from "../../components/SzervizLogRow"
+import {Link} from "../../routes";
 
 class VheicleShow extends Component {
     static async getInitialProps(props) {
@@ -19,9 +20,6 @@ class VheicleShow extends Component {
                 })
             );
         }
-
-
-        console.log(summary);
 
         return {
             address: props.query.address,
@@ -100,6 +98,15 @@ class VheicleShow extends Component {
                         <AddServiceLog address={this.props.address}/>
                     </Grid.Column>
                 </Grid>
+                <Link route={`/vheicles/${this.props.address}/modify`}>
+                    <a>
+                        <Button
+                            primary
+                            style={{marginTop: 10}}>
+                            Módosítás
+                        </Button>
+                    </a>
+                </Link>
                 <Table>
                     <Header>
                         <Row>

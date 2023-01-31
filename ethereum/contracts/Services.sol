@@ -86,6 +86,10 @@ contract Jarmu {
     SzervizEsemeny[] public Szervizesemenyek;
     uint public SzervizesemenyCount;
 
+    modifier restricted() {
+        require(msg.sender == Tulajdonos);
+        _;
+    }
 
     function Jarmu(address owner, string azonosito, string ujGyarto, uint evjarat, string uzemanyag) public {
         Tulajdonos = owner;
@@ -106,6 +110,22 @@ contract Jarmu {
 
         Szervizesemenyek.push(szervizEsemeny);
         SzervizesemenyCount++;
+    }
+
+    function setGyarto(string ujGyarto) public restricted {
+        Gyarto = ujGyarto;
+    }
+
+    function setEvjarat(uint ujEvjarat) public restricted {
+        Evjarat = ujEvjarat;
+    }
+
+    function setUzemanyag(string ujUzemanyag) public restricted {
+        Uzemanyag = ujUzemanyag;
+    }
+
+    function setTulajdonos(address ujTulajdonos) public restricted {
+        Tulajdonos = ujTulajdonos;
     }
 
     function getSummary() public view returns (string, string, uint, string, address, uint) {

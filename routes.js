@@ -7,6 +7,7 @@ routes
     .add('/servicecenters/new', 'servicecenters/new')
     .add('/services/:address', '/servicecenters/show')
     .add('/services/:address/modify', '/servicecenters/modify')
-    .add('/vheicles/:address', '/vheicles/show');
+    .add('/vheicles/:address', '/vheicles/show')
+    .add('/vheicles/:address/modify', '/vheicles/modify');
 
 module.exports = routes;
