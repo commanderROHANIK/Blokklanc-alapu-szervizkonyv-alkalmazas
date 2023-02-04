@@ -26,7 +26,7 @@ class AddServiceLogFrom extends Component {
             await campaign.methods.addSzervizesemeny(
                 this.state.szervizId,
                 this.state.kilommeterOraAllas,
-                this.state.datum,
+                Math.floor(new Date(this.state.datum) / 1000),
                 this.state.vegosszeg
             ).send({
                 from: accoutns[0]
@@ -56,6 +56,7 @@ class AddServiceLogFrom extends Component {
                     />
                     <label>Dátum</label>
                     <Input
+                        type="date"
                         value={this.state.datum}
                         onChange={event => this.setState({datum: event.target.value})}
                     />

@@ -10,7 +10,7 @@ class SzervizLogRow extends Component {
             <Row>
                 <Cell>{szervizEsemeny.SzervizId}</Cell>
                 <Cell>{szervizEsemeny.KilommeterOraAllas}</Cell>
-                <Cell>{szervizEsemeny.Datum}</Cell>
+                <Cell>{new Date(szervizEsemeny.Datum * 1000).toDateString()}</Cell>
                 <Cell>{szervizEsemeny.Vegosszeg}</Cell>
             </Row>
         );
