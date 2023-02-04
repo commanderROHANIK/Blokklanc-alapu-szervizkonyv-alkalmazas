@@ -14,11 +14,16 @@ class VheicleShow extends Component {
         let szervizLogs = [];
 
         if (count > 0) {
-            szervizLogs = await Promise.all(
-                Array(count).fill().map((element, index) => {
-                    return vheicle.methods.Szervizesemenyek(index).call();
-                })
-            );
+            for (let i = 0; i < count; i++) {
+                szervizLogs.push(await vheicle.methods.Szervizesemenyek(i).call());
+            }
+        }
+
+        let ev;
+        if (summary[7] == 0) {
+            ev = 'Out of warranty';
+        } else {
+            ev = new Date(summary[7]*1000).toDateString();
         }
 
         return {
@@ -29,7 +34,9 @@ class VheicleShow extends Component {
             uzemanyag: summary[3],
             tulajdonos: summary[4],
             SzervizesemenyCount: count,
-            SzervizEsemenyek: szervizLogs
+            SzervizEsemenyek: szervizLogs,
+            GaranciaKm: summary[6],
+            GaranciaEvek: ev
         };
     }
 
@@ -40,7 +47,8 @@ class VheicleShow extends Component {
             evjarat,
             uzemanyag,
             tulajdonos,
-            SzervizesemenyCount
+            GaranciaKm,
+            GaranciaEvek
         } = this.props;
 
         const items = [
@@ -70,6 +78,16 @@ class VheicleShow extends Component {
                 meta: 'Owner',
                 description: 'The current owner of the vheicle',
                 style: {overflowWrap: 'break-word'}
+            },
+            {
+                header: GaranciaKm,
+                meta: 'Kilometers under warranty',
+                description: 'The number of kilometers when the vheicle is under warranty'
+            },
+            {
+                header: GaranciaEvek,
+                meta: 'Warranty expiration date',
+                description: 'The date when the warranty expires'
             }
         ];
 

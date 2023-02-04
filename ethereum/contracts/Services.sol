@@ -74,7 +74,7 @@ contract Jarmu {
     struct SzervizEsemeny {
         uint SzervizId;
         uint KilommeterOraAllas;
-        string Datum;
+        uint Datum;
         uint Vegosszeg;
     }
 
@@ -85,6 +85,10 @@ contract Jarmu {
     address public Tulajdonos;
     SzervizEsemeny[] public Szervizesemenyek;
     uint public SzervizesemenyCount;
+    uint public GarancialisKilometerek;
+    uint public GarancialisEvek;
+    uint public HosszabitasCounter;
+    bool private Jogosult;
 
     modifier restricted() {
         require(msg.sender == Tulajdonos);
@@ -98,15 +102,29 @@ contract Jarmu {
         Evjarat = evjarat;
         Uzemanyag = uzemanyag;
         SzervizesemenyCount = 0;
+        GarancialisKilometerek = 30000;
+        GarancialisEvek = now + 1 years;
+        HosszabitasCounter = 0;
+        Jogosult = true;
     }
 
-    function addSzervizesemeny(uint szervizId, uint kilommeterOraAllas, string datum, uint vegosszeg) public {
+    function addSzervizesemeny(uint szervizId, uint kilommeterOraAllas, uint datum, uint vegosszeg) public {
         SzervizEsemeny memory szervizEsemeny = SzervizEsemeny({
         SzervizId : szervizId,
         KilommeterOraAllas : kilommeterOraAllas,
         Datum : datum,
         Vegosszeg : vegosszeg
         });
+
+        if (datum < GarancialisEvek && kilommeterOraAllas < GarancialisKilometerek && HosszabitasCounter < 6 && Jogosult) {
+            GarancialisEvek = GarancialisEvek + 1 years;
+            GarancialisKilometerek = GarancialisKilometerek + 30000;
+            HosszabitasCounter++;
+        } else {
+            GarancialisKilometerek = 0;
+            GarancialisEvek = 0;
+            Jogosult = false;
+        }
 
         Szervizesemenyek.push(szervizEsemeny);
         SzervizesemenyCount++;
@@ -128,14 +146,16 @@ contract Jarmu {
         Tulajdonos = ujTulajdonos;
     }
 
-    function getSummary() public view returns (string, string, uint, string, address, uint) {
+    function getSummary() public view returns (string, string, uint, string, address, uint, uint, uint) {
         return (
         Id,
         Gyarto,
         Evjarat,
         Uzemanyag,
         Tulajdonos,
-        SzervizesemenyCount
+        SzervizesemenyCount,
+        GarancialisKilometerek,
+        GarancialisEvek
         );
     }
 }
