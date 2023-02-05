@@ -3,6 +3,7 @@ import {Button, Form, Input, Message} from "semantic-ui-react";
 import Layout from "../../components/Layout";
 import web3 from "../../ethereum/web3";
 import Vheicle from "../../ethereum/vheicle";
+import {Router} from "../../routes";
 
 class VheicleModify extends Component {
     state = {
@@ -23,7 +24,7 @@ class VheicleModify extends Component {
         const regiuzemanyag = summery[3];
         const regitulajdonos = summery[4];
 
-        return {vheicle, regigyarto, regievjarat, regiuzemanyag, regitulajdonos};
+        return {vheicle, regigyarto, regievjarat, regiuzemanyag, regitulajdonos, address: props.query.address};
     }
 
     onSubmit = async (event) => {
@@ -58,6 +59,7 @@ class VheicleModify extends Component {
                 {from: accounts[0]}
             )));
 
+            Router.replaceRoute(`/vheicles/${this.props.address}`);
         } catch (err) {
             this.setState({errorMessage: err.message});
         }

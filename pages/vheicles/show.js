@@ -61,7 +61,7 @@ class VheicleShow extends Component {
             {
                 header: gyarto,
                 meta: 'Manufacturer',
-                description: 'The companyi or group who manufatured the vheicle'
+                description: 'The company or group who manufatured the vheicle'
             },
             {
                 header: evjarat,
