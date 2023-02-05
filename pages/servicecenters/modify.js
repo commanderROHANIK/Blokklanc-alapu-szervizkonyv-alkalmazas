@@ -3,6 +3,7 @@ import ServiceCenter from "../../ethereum/serviceCenter";
 import {Button, Form, Input, Message} from "semantic-ui-react";
 import Layout from "../../components/Layout";
 import web3 from "../../ethereum/web3";
+import {Router} from "../../routes";
 
 class ServiceCenterModify extends Component {
     state = {
@@ -23,7 +24,7 @@ class ServiceCenterModify extends Component {
         const regiemail = summery[3];
         const reginyitvatartas = summery[4];
 
-        return {serviceCenter, regitcim, regigps, regiemail, reginyitvatartas};
+        return {serviceCenter, regitcim, regigps, regiemail, reginyitvatartas, address: props.query.address};
     }
 
     onSubmit = async (event) => {
@@ -58,6 +59,7 @@ class ServiceCenterModify extends Component {
                 {from: accounts[0]}
             )));
 
+            Router.replaceRoute(`/services/${this.props.address}`);
         } catch (err) {
             this.setState({errorMessage: err.message});
         }
