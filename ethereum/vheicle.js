@@ -3,7 +3,7 @@ import Jarmu from './build/Jarmu.json';
 
 export default (address) => {
     return new web3.eth.Contract(
-        JSON.parse(Jarmu.interface),
+        Jarmu.abi,
         address
     );
 };
