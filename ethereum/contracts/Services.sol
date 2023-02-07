@@ -103,7 +103,7 @@ contract Jarmu {
         Uzemanyag = uzemanyag;
         SzervizesemenyCount = 0;
         GarancialisKilometerek = 30000;
-        GarancialisEvek = 1;
+        GarancialisEvek = block.timestamp + 365 days;
         HosszabitasCounter = 0;
         Jogosult = true;
     }
@@ -117,7 +117,7 @@ contract Jarmu {
         });
 
         if (datum < GarancialisEvek && kilommeterOraAllas < GarancialisKilometerek && HosszabitasCounter < 6 && Jogosult) {
-            GarancialisEvek = GarancialisEvek + 1 ;
+            GarancialisEvek = GarancialisEvek + 365 days;
             GarancialisKilometerek = GarancialisKilometerek + 30000;
             HosszabitasCounter++;
         } else {
