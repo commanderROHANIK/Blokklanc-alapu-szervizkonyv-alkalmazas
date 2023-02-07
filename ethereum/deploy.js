@@ -1,6 +1,6 @@
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 const Web3 = require('web3');
-const AdattaroloFactory = require('./build/AdattaroloFactory.json');
+const adattaroloFactory = require('./build/AdattaroloFactory.json');
 
 const provider = new HDWalletProvider(
     'smoke squeeze use raise pencil circle midnight super item custom impulse sure',
@@ -13,14 +13,13 @@ const web3 = new Web3(provider);
 const deploy = async () => {
     const accounts = await web3.eth.getAccounts();
 
-    console.log('Attempting to deploy from account', accounts[0]);
+    console.log("Attempting to deploy from account", accounts[0]);
 
-    const result = await new web3.eth.Contract(
-        JSON.parse(AdattaroloFactory.interface))
-        .deploy({data: AdattaroloFactory.bytecode})
-        .send({gas: '2000000', from: accounts[0]});
+    const result = await new web3.eth.Contract(adattaroloFactory.abi)
+        .deploy({ data: adattaroloFactory.evm.bytecode.object })
+        .send({ gas: "3400000", from: accounts[0] });
 
-    console.log('Contract deployed to', result.options.address);
+    console.log("Contract deployed to", result.options.address);
     provider.engine.stop();
 };
 deploy();

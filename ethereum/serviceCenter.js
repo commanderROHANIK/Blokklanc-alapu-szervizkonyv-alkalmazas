@@ -3,7 +3,7 @@ import Szerviz from './build/Szerviz.json';
 
 export default (address) => {
     return new web3.eth.Contract(
-        JSON.parse(Szerviz.interface),
+        Szerviz.abi,
         address
     );
 };

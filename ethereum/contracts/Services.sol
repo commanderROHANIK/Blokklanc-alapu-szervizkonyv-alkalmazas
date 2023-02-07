@@ -1,24 +1,24 @@
-pragma solidity ^0.4.17;
+pragma solidity ^0.8.9;
 
 contract AdattaroloFactory {
-    address[] public szervizek;
-    address[] public jarmuvek;
+    address payable[] public szervizek;
+    address payable[] public jarmuvek;
 
-    function createSzerviz(string cim, string gps, string email, string nyitvatartas) public {
-        address newSzerviz = new Szerviz(msg.sender, cim, gps, email, nyitvatartas);
-        szervizek.push(newSzerviz);
+    function createSzerviz(string memory cim, string memory gps, string memory email, string memory nyitvatartas) public {
+        address newSzerviz = address(new Szerviz(msg.sender, cim, gps, email, nyitvatartas));
+        szervizek.push(payable(newSzerviz));
     }
 
-    function createJarmu(string azonosito, string ujGyarto, uint evjarat, string uzemanyag) public {
-        address newJarmu = new Jarmu(msg.sender, azonosito, ujGyarto, evjarat, uzemanyag);
-        jarmuvek.push(newJarmu);
+    function createJarmu(string memory azonosito, string memory ujGyarto, uint evjarat, string memory uzemanyag) public {
+        address newJarmu = address(new Jarmu(msg.sender, azonosito, ujGyarto, evjarat, uzemanyag));
+        jarmuvek.push(payable(newJarmu));
     }
 
-    function getSzervizek() public view returns (address[]) {
+    function getSzervizek() public view returns (address payable[] memory) {
         return szervizek;
     }
 
-    function getJarmuvek() public view returns (address[]) {
+    function getJarmuvek() public view returns (address payable[] memory) {
         return jarmuvek;
     }
 }
@@ -30,7 +30,7 @@ contract Szerviz {
     string public Email;
     string public Nyitvatartas;
 
-    function Szerviz(address creator, string cim, string gps, string email, string nyitvatartas) public {
+    constructor (address creator, string memory cim, string memory gps, string memory email, string memory nyitvatartas){
         Manager = creator;
         Cim = cim;
         GPS = gps;
@@ -43,29 +43,29 @@ contract Szerviz {
         _;
     }
 
-    function setCim(string ujCim) public restricted {
+    function setCim(string memory ujCim) public restricted {
         Cim = ujCim;
     }
 
-    function setGPS(string ujGPS) public restricted {
+    function setGPS(string memory ujGPS) public restricted {
         GPS = ujGPS;
     }
 
-    function setEmail(string ujEmail) public restricted {
+    function setEmail(string memory ujEmail) public restricted {
         Email = ujEmail;
     }
 
-    function setNyitvatartas(string ujNyitvatartas) public restricted {
+    function setNyitvatartas(string memory ujNyitvatartas) public restricted {
         Nyitvatartas = ujNyitvatartas;
     }
 
-    function getSummary() public view returns (address, string, string, string, string) {
+    function getSummary() public view returns (address, string memory, string memory, string memory, string memory) {
         return (
-            Manager,
-            Cim,
-            GPS,
-            Email,
-            Nyitvatartas
+        Manager,
+        Cim,
+        GPS,
+        Email,
+        Nyitvatartas
         );
     }
 }
@@ -95,7 +95,7 @@ contract Jarmu {
         _;
     }
 
-    function Jarmu(address owner, string azonosito, string ujGyarto, uint evjarat, string uzemanyag) public {
+    constructor (address owner, string memory azonosito, string memory ujGyarto, uint evjarat, string memory uzemanyag) {
         Tulajdonos = owner;
         Id = azonosito;
         Gyarto = ujGyarto;
@@ -103,7 +103,7 @@ contract Jarmu {
         Uzemanyag = uzemanyag;
         SzervizesemenyCount = 0;
         GarancialisKilometerek = 30000;
-        GarancialisEvek = now + 1 years;
+        GarancialisEvek = block.timestamp + 365 days;
         HosszabitasCounter = 0;
         Jogosult = true;
     }
@@ -117,7 +117,7 @@ contract Jarmu {
         });
 
         if (datum < GarancialisEvek && kilommeterOraAllas < GarancialisKilometerek && HosszabitasCounter < 6 && Jogosult) {
-            GarancialisEvek = GarancialisEvek + 1 years;
+            GarancialisEvek = GarancialisEvek + 365 days;
             GarancialisKilometerek = GarancialisKilometerek + 30000;
             HosszabitasCounter++;
         } else {
@@ -130,7 +130,7 @@ contract Jarmu {
         SzervizesemenyCount++;
     }
 
-    function setGyarto(string ujGyarto) public restricted {
+    function setGyarto(string memory ujGyarto) public restricted {
         Gyarto = ujGyarto;
     }
 
@@ -138,7 +138,7 @@ contract Jarmu {
         Evjarat = ujEvjarat;
     }
 
-    function setUzemanyag(string ujUzemanyag) public restricted {
+    function setUzemanyag(string memory ujUzemanyag) public restricted {
         Uzemanyag = ujUzemanyag;
     }
 
@@ -146,7 +146,7 @@ contract Jarmu {
         Tulajdonos = ujTulajdonos;
     }
 
-    function getSummary() public view returns (string, string, uint, string, address, uint, uint, uint) {
+    function getSummary() public view returns (string memory, string memory, uint, string memory, address, uint, uint, uint) {
         return (
         Id,
         Gyarto,
