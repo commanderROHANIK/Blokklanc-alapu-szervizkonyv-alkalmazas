@@ -13,7 +13,7 @@ const originalNyitvatartas = "nyitvatartas";
 
 let accounts;
 let factory;
-let campaignAddress;
+let szervizAddress;
 let szerviz;
 
 beforeEach(async () => {
@@ -28,8 +28,8 @@ beforeEach(async () => {
         gas: "5000000",
     });
 
-    [campaignAddress] = await factory.methods.getSzervizek().call();
-    szerviz = await new web3.eth.Contract(compiledSzerviz.abi, campaignAddress);
+    [szervizAddress] = await factory.methods.getSzervizek().call();
+    szerviz = await new web3.eth.Contract(compiledSzerviz.abi, szervizAddress);
 });
 
 describe("Service center", () => {
