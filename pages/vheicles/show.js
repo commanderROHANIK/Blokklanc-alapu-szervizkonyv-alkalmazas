@@ -131,6 +131,7 @@ class VheicleShow extends Component {
                             <HeaderCell>Szervíz azonosító</HeaderCell>
                             <HeaderCell>Kilóméteróra állás</HeaderCell>
                             <HeaderCell>Dátum</HeaderCell>
+                            <HeaderCell>Alkatrészek</HeaderCell>
                             <HeaderCell>Végösszeg</HeaderCell>
                         </Row>
                     </Header>

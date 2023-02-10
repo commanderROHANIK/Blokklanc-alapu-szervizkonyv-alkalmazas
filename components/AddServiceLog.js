@@ -9,6 +9,7 @@ class AddServiceLogFrom extends Component {
         szervizId: '',
         kilommeterOraAllas: '',
         datum: '',
+        alkatreszek: '',
         vegosszeg: '',
         errorMessage: '',
         loading: false
@@ -27,6 +28,7 @@ class AddServiceLogFrom extends Component {
                 this.state.szervizId,
                 this.state.kilommeterOraAllas,
                 Math.floor(new Date(this.state.datum) / 1000),
+                this.state.alkatreszek,
                 this.state.vegosszeg
             ).send({
                 from: accoutns[0]
@@ -59,6 +61,11 @@ class AddServiceLogFrom extends Component {
                         type="date"
                         value={this.state.datum}
                         onChange={event => this.setState({datum: event.target.value})}
+                    />
+                    <label>Alkatrészek</label>
+                    <Input
+                        value={this.state.alkatreszek}
+                        onChange={event => this.setState({alkatreszek: event.target.value})}
                     />
                     <label>Végösszeg</label>
                     <Input
