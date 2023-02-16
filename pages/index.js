@@ -17,7 +17,7 @@ class SzervizkonyvIndex extends Component {
                 header: address,
                 description: (
                     <Link route={`/vheicles/${address}`}>
-                        <a>View Vheicle</a>
+                        <a>View vehicle</a>
                     </Link>
                 ),
                 fluid: true
@@ -33,7 +33,7 @@ class SzervizkonyvIndex extends Component {
                 header: address,
                 description: (
                     <Link route={`/services/${address}`}>
-                        <a>View Service center</a>
+                        <a>View service center</a>
                     </Link>
                 ),
                 fluid: true
@@ -46,10 +46,10 @@ class SzervizkonyvIndex extends Component {
     render() {
         return (
             <Layout>
-                <h3>Járművek:</h3>
+                <h3>Vehicles:</h3>
                 {this.renderVheicles()}
 
-                <h3>Szervizek:</h3>
+                <h3>Service centers:</h3>
                 {this.renderServices()}
             </Layout>
         );

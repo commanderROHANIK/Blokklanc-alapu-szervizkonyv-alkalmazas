@@ -74,7 +74,7 @@ class ServiceCenterShow extends Component {
                         <Button
                             primary
                             style={{marginTop: 10}}>
-                            Módosítás
+                            Edit
                         </Button>
                     </a>
                 </Link>

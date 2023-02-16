@@ -16,7 +16,7 @@ class SzervizkonyvIndex extends Component {
                 header: address,
                 description: (
                     <Link route={`/services/${address}`}>
-                        <a>View Service center</a>
+                        <a>View service center</a>
                     </Link>
                 ),
                 fluid: true
@@ -29,7 +29,7 @@ class SzervizkonyvIndex extends Component {
     render() {
         return (
             <Layout>
-                <h3>Szervizek:</h3>
+                <h3>Service centers</h3>
                 {this.renderServices()}
             </Layout>
         );

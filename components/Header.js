@@ -18,7 +18,7 @@ export default () => {
                 </Link>
                 <Link route="/vheicles/listAll">
                     <a className="item">
-                        List all vheicles
+                        List all vehicles
                     </a>
                 </Link>
                 <Link route="/servicecenters/new">
@@ -28,7 +28,7 @@ export default () => {
                 </Link>
                 <Link route="/vheicles/new">
                     <a className="item">
-                        Add vheicle
+                        Add vehicle
                     </a>
                 </Link>
             </Menu.Menu>

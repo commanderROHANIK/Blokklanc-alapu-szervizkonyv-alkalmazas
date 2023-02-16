@@ -16,7 +16,7 @@ class AllVheicles extends Component {
                 header: address,
                 description: (
                     <Link route={`/vheicles/${address}`}>
-                        <a>View Vheicle</a>
+                        <a>View vehicle</a>
                     </Link>
                 ),
                 fluid: true
@@ -29,6 +29,7 @@ class AllVheicles extends Component {
     render() {
         return (
             <Layout>
+                <h3>Vehicles</h3>
                 {this.renderVheicles()}
             </Layout>
         );

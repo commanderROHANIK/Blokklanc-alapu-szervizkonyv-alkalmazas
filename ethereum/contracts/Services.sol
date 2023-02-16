@@ -75,6 +75,7 @@ contract Jarmu {
         uint SzervizId;
         uint KilommeterOraAllas;
         uint Datum;
+        string Alkatreszek;
         uint Vegosszeg;
     }
 
@@ -108,11 +109,12 @@ contract Jarmu {
         Jogosult = true;
     }
 
-    function addSzervizesemeny(uint szervizId, uint kilommeterOraAllas, uint datum, uint vegosszeg) public {
+    function addSzervizesemeny(uint szervizId, uint kilommeterOraAllas, uint datum, string memory alkatreszek, uint vegosszeg) public {
         SzervizEsemeny memory szervizEsemeny = SzervizEsemeny({
         SzervizId : szervizId,
         KilommeterOraAllas : kilommeterOraAllas,
         Datum : datum,
+        Alkatreszek: alkatreszek,
         Vegosszeg : vegosszeg
         });
 
