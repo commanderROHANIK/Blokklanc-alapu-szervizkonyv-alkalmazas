@@ -72,25 +72,25 @@ class VheicleModify extends Component {
             <Layout>
                 <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
                     <Form.Field>
-                        <label>Gyártó</label>
+                        <label>Manufacturer</label>
                         <Input
                             value={this.state.gyarto}
                             onChange={event =>
                                 this.setState({gyarto: event.target.value})}
                         />
-                        <label>Évjárat</label>
+                        <label>Year of manufacturing</label>
                         <Input
                             value={this.state.evjarat}
                             onChange={event =>
                                 this.setState({evjarat: event.target.value})}
                         />
-                        <label>Üzemanyag</label>
+                        <label>Fuel</label>
                         <Input
                             value={this.state.uzemanyag}
                             onChange={event =>
                                 this.setState({uzemanyag: event.target.value})}
                         />
-                        <label>Tulajdonos</label>
+                        <label>Owner</label>
                         <Input
                             value={this.state.tulajdonos}
                             onChange={event =>
@@ -101,7 +101,7 @@ class VheicleModify extends Component {
                     <Button
                         loading={this.state.loading}
                         primary
-                    >Mentés</Button>
+                    >Save</Button>
                 </Form>
             </Layout>
         );

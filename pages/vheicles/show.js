@@ -121,18 +121,18 @@ class VheicleShow extends Component {
                         <Button
                             primary
                             style={{marginTop: 10}}>
-                            Módosítás
+                            Edit
                         </Button>
                     </a>
                 </Link>
                 <Table>
                     <Header>
                         <Row>
-                            <HeaderCell>Szervíz azonosító</HeaderCell>
-                            <HeaderCell>Kilóméteróra állás</HeaderCell>
-                            <HeaderCell>Dátum</HeaderCell>
-                            <HeaderCell>Alkatrészek</HeaderCell>
-                            <HeaderCell>Végösszeg</HeaderCell>
+                            <HeaderCell>Service center identifier</HeaderCell>
+                            <HeaderCell>Mileage</HeaderCell>
+                            <HeaderCell>Date</HeaderCell>
+                            <HeaderCell>Used parts</HeaderCell>
+                            <HeaderCell>Price</HeaderCell>
                         </Row>
                     </Header>
                     <Body>

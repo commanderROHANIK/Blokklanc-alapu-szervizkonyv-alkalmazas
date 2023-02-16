@@ -72,7 +72,7 @@ class ServiceCenterModify extends Component {
             <Layout>
                 <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
                     <Form.Field>
-                        <label>Cím</label>
+                        <label>Address</label>
                         <Input
                             value={this.state.cim}
                             onChange={event =>
@@ -90,7 +90,7 @@ class ServiceCenterModify extends Component {
                             onChange={event =>
                                 this.setState({email: event.target.value})}
                         />
-                        <label>Nyitvatartás</label>
+                        <label>Open hours</label>
                         <Input
                             value={this.state.nyitvatartas}
                             onChange={event =>
@@ -101,7 +101,7 @@ class ServiceCenterModify extends Component {
                     <Button
                         loading={this.state.loading}
                         primary
-                    >Mentés</Button>
+                    >Save</Button>
                 </Form>
             </Layout>
         );

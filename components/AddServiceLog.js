@@ -46,28 +46,28 @@ class AddServiceLogFrom extends Component {
         return (
             <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
                 <Form.Field>
-                    <label>Szervíz azonosító</label>
+                    <label>Service center identifier</label>
                     <Input
                         value={this.state.szervizId}
                         onChange={event => this.setState({szervizId: event.target.value})}
                     />
-                    <label>Kilóméteróra állás</label>
+                    <label>Mileage</label>
                     <Input
                         value={this.state.kilommeterOraAllas}
                         onChange={event => this.setState({kilommeterOraAllas: event.target.value})}
                     />
-                    <label>Dátum</label>
+                    <label>Date</label>
                     <Input
                         type="date"
                         value={this.state.datum}
                         onChange={event => this.setState({datum: event.target.value})}
                     />
-                    <label>Alkatrészek</label>
+                    <label>Used parts</label>
                     <Input
                         value={this.state.alkatreszek}
                         onChange={event => this.setState({alkatreszek: event.target.value})}
                     />
-                    <label>Végösszeg</label>
+                    <label>Price</label>
                     <Input
                         value={this.state.vegosszeg}
                         onChange={event => this.setState({vegosszeg: event.target.value})}
@@ -75,7 +75,7 @@ class AddServiceLogFrom extends Component {
 
                     <Message error header="Oops!" content={this.state.errorMessage}/>
                     <Button primary loading={this.state.loading} style={{marginTop: 10}}>
-                        Rögzít
+                        Add
                     </Button>
                 </Form.Field>
             </Form>

@@ -43,25 +43,25 @@ class AddServiceCenter extends Component {
             <Layout>
                 <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
                     <Form.Field>
-                        <label>Jármű azonosító</label>
+                        <label>Vehicle identifier</label>
                         <Input
                             value={this.state.azonosito}
                             onChange={event =>
                                 this.setState({azonosito: event.target.value})}
                         />
-                        <label>Gyártó:</label>
+                        <label>Manufacturer</label>
                         <Input
                             value={this.state.gyarto}
                             onChange={event =>
                                 this.setState({gyarto: event.target.value})}
                         />
-                        <label>Évjárat</label>
+                        <label>Year of manufacturing</label>
                         <Input
                             value={this.state.evjarat}
                             onChange={event =>
                                 this.setState({evjarat: event.target.value})}
                         />
-                        <label>Üzemanyag</label>
+                        <label>Fuel</label>
                         <Input
                             value={this.state.uzemanyag}
                             onChange={event =>
