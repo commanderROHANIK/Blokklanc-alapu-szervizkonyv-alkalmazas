@@ -24,11 +24,18 @@ contract AdattaroloFactory {
 }
 
 contract Szerviz {
+    struct Alkalmazott {
+        address Azonosito;
+        string Nev;
+    }
+
     address public Manager;
     string public Cim;
     string public GPS;
     string public Email;
     string public Nyitvatartas;
+    Alkalmazott[] public Alkalmazottak;
+    uint public AlkalmazottCount;
 
     constructor (address creator, string memory cim, string memory gps, string memory email, string memory nyitvatartas){
         Manager = creator;
@@ -36,11 +43,28 @@ contract Szerviz {
         GPS = gps;
         Email = email;
         Nyitvatartas = nyitvatartas;
+        AlkalmazottCount = 0;
     }
 
     modifier restricted() {
         require(msg.sender == Manager);
         _;
+    }
+
+    function addEmploye(address azonosito, string memory nev) public restricted {
+        Alkalmazott memory alkalmazott = Alkalmazott({
+        Azonosito : azonosito,
+        Nev : nev
+        });
+
+        Alkalmazottak.push(alkalmazott);
+        AlkalmazottCount++;
+    }
+
+    function removeEmploye(uint index) public restricted {
+        Alkalmazottak[index] = Alkalmazottak[AlkalmazottCount - 1];
+        Alkalmazottak.pop();
+        AlkalmazottCount--;
     }
 
     function setCim(string memory ujCim) public restricted {
@@ -59,13 +83,14 @@ contract Szerviz {
         Nyitvatartas = ujNyitvatartas;
     }
 
-    function getSummary() public view returns (address, string memory, string memory, string memory, string memory) {
+    function getSummary() public view returns (address, string memory, string memory, string memory, string memory, uint) {
         return (
         Manager,
         Cim,
         GPS,
         Email,
-        Nyitvatartas
+        Nyitvatartas,
+        AlkalmazottCount
         );
     }
 }

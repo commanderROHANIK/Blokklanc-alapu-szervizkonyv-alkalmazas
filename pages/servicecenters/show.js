@@ -1,14 +1,23 @@
 import React, {Component} from "react";
 import Layout from '../../components/Layout';
 import ServiceCenter from "../../ethereum/serviceCenter";
-import {Button, Card, Grid} from "semantic-ui-react";
+import {Button, Card, Grid, Table} from "semantic-ui-react";
 import {Link} from "../../routes";
+import AddEmploye from "../../components/AddEmploye";
+import AlkalmazottRow from "../../components/AlkalmazottRow";
 
 class ServiceCenterShow extends Component {
     static async getInitialProps(props) {
         const serviceCenter = ServiceCenter(props.query.address);
-
         const summary = await serviceCenter.methods.getSummary().call();
+        const count = await serviceCenter.methods.AlkalmazottCount().call();
+        let alkalmazottak = [];
+
+        if (count > 0) {
+            for (let i = 0; i < count; i++) {
+                alkalmazottak.push(await serviceCenter.methods.Alkalmazottak(i).call());
+            }
+        }
 
         return {
             address: props.query.address,
@@ -16,7 +25,8 @@ class ServiceCenterShow extends Component {
             cim: summary[1],
             gps: summary[2],
             email: summary[3],
-            nyitvatartas: summary[4]
+            nyitvatartas: summary[4],
+            Alkalmazottak: alkalmazottak
         };
     }
 
@@ -61,12 +71,26 @@ class ServiceCenterShow extends Component {
         return <Card.Group items={items}/>
     }
 
+    renderRows() {
+        return this.props.Alkalmazottak.map((alkalmazott, index) => {
+            return <AlkalmazottRow
+                key={index}
+                alkalmazott={alkalmazott}
+            />;
+        });
+    }
+
     render() {
+        const {Header, Row, HeaderCell, Body} = Table;
+
         return (
             <Layout>
                 <Grid>
                     <Grid.Column width={10}>
                         {this.renderCards()}
+                    </Grid.Column>
+                    <Grid.Column width={6}>
+                        <AddEmploye address={this.props.address}/>
                     </Grid.Column>
                 </Grid>
                 <Link route={`/services/${this.props.address}/modify`}>
@@ -78,6 +102,18 @@ class ServiceCenterShow extends Component {
                         </Button>
                     </a>
                 </Link>
+
+                <Table>
+                    <Header>
+                        <Row>
+                            <HeaderCell>Identifier</HeaderCell>
+                            <HeaderCell>Name</HeaderCell>
+                        </Row>
+                    </Header>
+                    <Body>
+                        {this.renderRows()}
+                    </Body>
+                </Table>
             </Layout>
         );
     }
