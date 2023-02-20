@@ -75,6 +75,8 @@ class ServiceCenterShow extends Component {
         return this.props.Alkalmazottak.map((alkalmazott, index) => {
             return <AlkalmazottRow
                 key={index}
+                id={index}
+                address={this.props.address}
                 alkalmazott={alkalmazott}
             />;
         });
