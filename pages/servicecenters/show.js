@@ -110,6 +110,7 @@ class ServiceCenterShow extends Component {
                         <Row>
                             <HeaderCell>Identifier</HeaderCell>
                             <HeaderCell>Name</HeaderCell>
+                            <HeaderCell></HeaderCell>
                         </Row>
                     </Header>
                     <Body>

@@ -72,7 +72,7 @@ class ServiceCenterModify extends Component {
             <Layout>
                 <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
                     <Form.Field>
-                        <label>Address</label>
+                        <label>Location</label>
                         <Input
                             value={this.state.cim}
                             onChange={event =>
