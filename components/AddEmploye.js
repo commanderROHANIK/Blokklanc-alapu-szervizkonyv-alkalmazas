@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Button, Form, Input} from "semantic-ui-react";
+import {Button, Form, Input, Message} from "semantic-ui-react";
 import web3 from "../ethereum/web3";
 import {Router} from "../routes";
 import ServiceCenter from "../ethereum/serviceCenter";
@@ -16,10 +16,19 @@ class AddEmploye extends Component {
         event.preventDefault();
 
         const szerviz = ServiceCenter(this.props.address);
+        let summary = await szerviz.methods.getSummary().call();
+        let alkalmazottCount = summary[5];
 
         this.setState({loading: true, errorMessage: ''});
 
         try {
+            for (let i = 0; i < alkalmazottCount; i++) {
+                let alkalmazott = await szerviz.methods.Alkalmazottak(i).call();
+                if (alkalmazott.Azonosito == this.state.address) {
+                    throw new Error("Employee has been recorded earlier");
+                }
+            }
+
             const accoutns = await web3.eth.getAccounts();
             await szerviz.methods.addEmploye(
                 this.state.address,
@@ -33,7 +42,7 @@ class AddEmploye extends Component {
             this.setState({errorMessage: err.message});
         }
 
-        this.setState({loading: false, value: ''});
+        this.setState({loading: false});
     }
 
     render() {
@@ -53,6 +62,7 @@ class AddEmploye extends Component {
                     <Button primary loading={this.state.loading} style={{marginTop: 10}}>
                         Add
                     </Button>
+                    <Message error header="Oops!" content={this.state.errorMessage} />
                 </Form.Field>
             </Form>
         );
