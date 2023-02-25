@@ -3,6 +3,7 @@ import {Button, Form, Input, Message} from "semantic-ui-react";
 import Campaign from "../ethereum/vheicle";
 import web3 from "../ethereum/web3";
 import {Router} from "../routes";
+import ServiceCenter from "../ethereum/serviceCenter";
 
 class AddServiceLogFrom extends Component {
     state = {
@@ -24,6 +25,20 @@ class AddServiceLogFrom extends Component {
 
         try {
             const accoutns = await web3.eth.getAccounts();
+
+            let szerviz = ServiceCenter(this.state.szervizId);
+            let summary = await szerviz.methods.getSummary().call();
+            let employCount = summary[5];
+            let emps = [];
+
+            for (let i = 0; i < employCount; i++) {
+                emps.push(await szerviz.methods.Alkalmazottak(i).call());
+            }
+
+            if (!emps.some(employee => employee.Azonosito == accoutns[0])) {
+                throw new Error("You are not a registered employee of the service center!");
+            }
+
             await campaign.methods.addSzervizesemeny(
                 this.state.szervizId,
                 this.state.kilommeterOraAllas,
