@@ -63,11 +63,13 @@ class AddServiceLogFrom extends Component {
                 <Form.Field>
                     <label>Service center identifier</label>
                     <Input
+                        type="text"
                         value={this.state.szervizId}
                         onChange={event => this.setState({szervizId: event.target.value})}
                     />
                     <label>Mileage</label>
                     <Input
+                        type="number"
                         value={this.state.kilommeterOraAllas}
                         onChange={event => this.setState({kilommeterOraAllas: event.target.value})}
                     />
@@ -79,11 +81,13 @@ class AddServiceLogFrom extends Component {
                     />
                     <label>Used parts</label>
                     <Input
+                        type="text"
                         value={this.state.alkatreszek}
                         onChange={event => this.setState({alkatreszek: event.target.value})}
                     />
                     <label>Price</label>
                     <Input
+                        type="number"
                         value={this.state.vegosszeg}
                         onChange={event => this.setState({vegosszeg: event.target.value})}
                     />

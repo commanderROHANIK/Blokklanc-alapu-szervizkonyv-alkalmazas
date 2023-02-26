@@ -51,11 +51,13 @@ class AddEmploye extends Component {
                 <Form.Field>
                     <label>Employee address</label>
                     <Input
+                        type="text"
                         value={this.state.address}
                         onChange={event => this.setState({address: event.target.value})}
                     />
                     <label>Employee name</label>
                     <Input
+                        type="text"
                         value={this.state.nev}
                         onChange={event => this.setState({nev: event.target.value})}
                     />

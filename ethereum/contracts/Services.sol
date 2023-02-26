@@ -97,7 +97,7 @@ contract Szerviz {
 
 contract Jarmu {
     struct SzervizEsemeny {
-        uint SzervizId;
+        address SzervizId;
         uint KilommeterOraAllas;
         uint Datum;
         string Alkatreszek;
@@ -134,7 +134,7 @@ contract Jarmu {
         Jogosult = true;
     }
 
-    function addSzervizesemeny(uint szervizId, uint kilommeterOraAllas, uint datum, string memory alkatreszek, uint vegosszeg) public {
+    function addSzervizesemeny(address szervizId, uint kilommeterOraAllas, uint datum, string memory alkatreszek, uint vegosszeg) public {
         SzervizEsemeny memory szervizEsemeny = SzervizEsemeny({
         SzervizId : szervizId,
         KilommeterOraAllas : kilommeterOraAllas,
