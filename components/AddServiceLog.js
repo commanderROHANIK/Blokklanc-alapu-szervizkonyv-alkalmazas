@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Button, Form, Input, Message} from "semantic-ui-react";
-import Campaign from "../ethereum/vheicle";
+import Vehicle from "../ethereum/vheicle";
 import web3 from "../ethereum/web3";
 import {Router} from "../routes";
 import ServiceCenter from "../ethereum/serviceCenter";
@@ -19,7 +19,7 @@ class AddServiceLogFrom extends Component {
     onSubmit = async event => {
         event.preventDefault();
 
-        const campaign = Campaign(this.props.address);
+        const vehicle = Vehicle(this.props.address);
 
         this.setState({loading: true, errorMessage: ''});
 
@@ -39,7 +39,7 @@ class AddServiceLogFrom extends Component {
                 throw new Error("You are not a registered employee of the service center!");
             }
 
-            await campaign.methods.addSzervizesemeny(
+            await vehicle.methods.addSzervizesemeny(
                 this.state.szervizId,
                 this.state.kilommeterOraAllas,
                 Math.floor(new Date(this.state.datum) / 1000),
