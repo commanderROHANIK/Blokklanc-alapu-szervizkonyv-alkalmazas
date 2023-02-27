@@ -157,7 +157,21 @@ describe("Veichle", () => {
     });
 
     it("addSzervizEsemeny rossz ev rossz km", async () => {
-        await jarmu.methods.addSzervizesemeny(1, 2000000, 36254896, "asdf", 200).send({
+        const originalCim = "cim";
+        const originalGPS = "gps";
+        const originalEmail = "email";
+        const originalNyitvatartas = "nyitvatartas";
+
+        let szervizAddress;
+
+        await factory.methods.createSzerviz(originalCim, originalGPS, originalEmail, originalNyitvatartas).send({
+            from: accounts[0],
+            gas: "5000000",
+        });
+
+        [szervizAddress] = await factory.methods.getSzervizek().call();
+
+        await jarmu.methods.addSzervizesemeny(szervizAddress, 2000000, 36254896, "asdf", 200).send({
             from: accounts[0],
             gasLimit: '6000000'
         });
@@ -170,7 +184,21 @@ describe("Veichle", () => {
     });
 
     it("addSzervizEsemeny jo ev rossz km", async () => {
-        await jarmu.methods.addSzervizesemeny(1, 900000, Math.floor(Date.now()/1000), "asdf", 200).send({
+        const originalCim = "cim";
+        const originalGPS = "gps";
+        const originalEmail = "email";
+        const originalNyitvatartas = "nyitvatartas";
+
+        let szervizAddress;
+
+        await factory.methods.createSzerviz(originalCim, originalGPS, originalEmail, originalNyitvatartas).send({
+            from: accounts[0],
+            gas: "5000000",
+        });
+
+        [szervizAddress] = await factory.methods.getSzervizek().call();
+
+        await jarmu.methods.addSzervizesemeny(szervizAddress, 900000, Math.floor(Date.now()/1000), "asdf", 200).send({
             from: accounts[0],
             gasLimit: '6000000'
         });
@@ -183,9 +211,23 @@ describe("Veichle", () => {
     });
 
     it("addSzervizEsemeny rossz ev jo km", async () => {
+        const originalCim = "cim";
+        const originalGPS = "gps";
+        const originalEmail = "email";
+        const originalNyitvatartas = "nyitvatartas";
+
+        let szervizAddress;
+
+        await factory.methods.createSzerviz(originalCim, originalGPS, originalEmail, originalNyitvatartas).send({
+            from: accounts[0],
+            gas: "5000000",
+        });
+
+        [szervizAddress] = await factory.methods.getSzervizek().call();
+
         let date = new Date();
         date.setDate(date.getDate() + 365);
-        await jarmu.methods.addSzervizesemeny(1, 200, Math.floor(date/1000), "asdf", 200).send({
+        await jarmu.methods.addSzervizesemeny(szervizAddress, 200, Math.floor(date/1000), "asdf", 200).send({
             from: accounts[0],
             gasLimit: '6000000'
         });
@@ -198,7 +240,21 @@ describe("Veichle", () => {
     });
 
     it("addSzervizEsemeny jo ev jo km", async () => {
-        await jarmu.methods.addSzervizesemeny(1, 200, Math.floor(Date.now()/1000), "asdf", 200).send({
+        const originalCim = "cim";
+        const originalGPS = "gps";
+        const originalEmail = "email";
+        const originalNyitvatartas = "nyitvatartas";
+
+        let szervizAddress;
+
+        await factory.methods.createSzerviz(originalCim, originalGPS, originalEmail, originalNyitvatartas).send({
+            from: accounts[0],
+            gas: "5000000",
+        });
+
+        [szervizAddress] = await factory.methods.getSzervizek().call();
+
+        await jarmu.methods.addSzervizesemeny(szervizAddress, 200, Math.floor(Date.now()/1000), "asdf", 200).send({
             from: accounts[0],
             gasLimit: '6000000'
         });
