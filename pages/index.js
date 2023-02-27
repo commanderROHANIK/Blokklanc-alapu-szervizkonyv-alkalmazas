@@ -46,10 +46,10 @@ class SzervizkonyvIndex extends Component {
     render() {
         return (
             <Layout>
-                <h3>Vehicles:</h3>
+                <h3>Vehicles</h3>
                 {this.renderVheicles()}
 
-                <h3>Service centers:</h3>
+                <h3>Service centers</h3>
                 {this.renderServices()}
             </Layout>
         );

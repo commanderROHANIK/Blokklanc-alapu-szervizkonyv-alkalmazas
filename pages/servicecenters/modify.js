@@ -72,26 +72,30 @@ class ServiceCenterModify extends Component {
             <Layout>
                 <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
                     <Form.Field>
-                        <label>Address</label>
+                        <label>Location</label>
                         <Input
+                            type="text"
                             value={this.state.cim}
                             onChange={event =>
                                 this.setState({cim: event.target.value})}
                         />
                         <label>GPS</label>
                         <Input
+                            type="text"
                             value={this.state.gps}
                             onChange={event =>
                                 this.setState({gps: event.target.value})}
                         />
                         <label>E-mail</label>
                         <Input
+                            type="text"
                             value={this.state.email}
                             onChange={event =>
                                 this.setState({email: event.target.value})}
                         />
                         <label>Open hours</label>
                         <Input
+                            type="text"
                             value={this.state.nyitvatartas}
                             onChange={event =>
                                 this.setState({nyitvatartas: event.target.value})}

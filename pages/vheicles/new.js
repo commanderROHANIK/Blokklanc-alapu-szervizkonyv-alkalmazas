@@ -45,24 +45,28 @@ class AddServiceCenter extends Component {
                     <Form.Field>
                         <label>Vehicle identifier</label>
                         <Input
+                            type="text"
                             value={this.state.azonosito}
                             onChange={event =>
                                 this.setState({azonosito: event.target.value})}
                         />
                         <label>Manufacturer</label>
                         <Input
+                            type="text"
                             value={this.state.gyarto}
                             onChange={event =>
                                 this.setState({gyarto: event.target.value})}
                         />
                         <label>Year of manufacturing</label>
                         <Input
+                            type="number"
                             value={this.state.evjarat}
                             onChange={event =>
                                 this.setState({evjarat: event.target.value})}
                         />
                         <label>Fuel</label>
                         <Input
+                            type="text"
                             value={this.state.uzemanyag}
                             onChange={event =>
                                 this.setState({uzemanyag: event.target.value})}
