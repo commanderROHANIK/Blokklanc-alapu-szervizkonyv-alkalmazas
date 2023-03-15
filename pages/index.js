@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import factory from "../ethereum/factory";
-import {Card} from "semantic-ui-react";
 import Layout from "../components/commonComponents/Layout";
-import {Link} from "../routes";
+import VehicleList from "../components/vehicleComponents/VehicleList";
+import ServiceCentersList from "../components/serviceCenterComponents/ServiceCentersList";
 
 class SzervizkonyvIndex extends Component {
     static async getInitialProps() {
@@ -11,46 +11,16 @@ class SzervizkonyvIndex extends Component {
         return {vheicles, services};
     }
 
-    renderVheicles() {
-        const items = this.props.vheicles.map(address => {
-            return {
-                header: address,
-                description: (
-                    <Link route={`/vheicles/${address}`}>
-                        <a>View vehicle</a>
-                    </Link>
-                ),
-                fluid: true
-            }
-        });
-
-        return <Card.Group items={items}/>
-    }
-
-    renderServices() {
-        const items = this.props.services.map(address => {
-            return {
-                header: address,
-                description: (
-                    <Link route={`/services/${address}`}>
-                        <a>View service center</a>
-                    </Link>
-                ),
-                fluid: true
-            }
-        });
-
-        return <Card.Group items={items}/>
-    }
-
     render() {
         return (
             <Layout>
                 <h3>Vehicles</h3>
-                {this.renderVheicles()}
+                <VehicleList
+                    vehicles={this.props.vheicles}/>
 
                 <h3>Service centers</h3>
-                {this.renderServices()}
+                <ServiceCentersList
+                    serviceCenters={this.props.services}/>
             </Layout>
         );
     }
