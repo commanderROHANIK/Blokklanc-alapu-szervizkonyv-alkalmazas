@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import factory from "../../ethereum/factory";
-import Layout from "../../components/Layout";
+import Layout from "../../components/commonComponents/Layout";
 import Vheicle from "../../ethereum/vheicle";
-import VehicleList from "../../components/VehicleList";
-import VehicleSearch from "../../components/VehicleSearch";
+import VehicleList from "../../components/vehicleComponents/VehicleList";
+import VehicleSearch from "../../components/vehicleComponents/VehicleSearch";
 
 class AllVheicles extends Component {
     state = {

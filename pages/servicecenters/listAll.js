@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import factory from "../../ethereum/factory";
 import {Card} from "semantic-ui-react";
-import Layout from "../../components/Layout";
+import Layout from "../../components/commonComponents/Layout";
 import {Link} from "../../routes";
 
 class SzervizkonyvIndex extends Component {
