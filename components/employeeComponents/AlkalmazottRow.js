@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Table, Button, Icon} from "semantic-ui-react";
-import ServiceCenter from "../ethereum/serviceCenter";
-import web3 from "../ethereum/web3";
+import ServiceCenter from "../../ethereum/serviceCenter";
+import web3 from "../../ethereum/web3";
 
 class AlkalmazottRow extends Component {
     onApprove = async () => {
