@@ -1,36 +1,46 @@
 import React, {Component} from "react";
 import factory from "../../ethereum/factory";
-import {Card} from "semantic-ui-react";
-import Layout from "../../components/Layout";
-import {Link} from "../../routes";
+import Layout from "../../components/commonComponents/Layout";
+import Vheicle from "../../ethereum/vheicle";
+import VehicleList from "../../components/vehicleComponents/VehicleList";
+import VehicleSearch from "../../components/vehicleComponents/VehicleSearch";
 
 class AllVheicles extends Component {
+    state = {
+        results: []
+    };
     static async getInitialProps() {
-        const vheicles = await factory.methods.getJarmuvek().call();
-        return {vheicles};
+        const vehiclesAddresses = await factory.methods.getJarmuvek().call();
+        var vehicles = new Set();
+
+        for (const x of vehiclesAddresses) {
+            let vehicle = Vheicle(x);
+            vehicles[x] = await vehicle.methods.getSummary().call();
+        }
+
+        return {vehiclesAddresses, vehicles};
     }
 
-    renderVheicles() {
-        const items = this.props.vheicles.map(address => {
-            return {
-                header: address,
-                description: (
-                    <Link route={`/vheicles/${address}`}>
-                        <a>View vehicle</a>
-                    </Link>
-                ),
-                fluid: true
-            }
-        });
+    search(lookup) {
+        let results = [];
 
-        return <Card.Group items={items}/>
+        for (let k of this.props.vehiclesAddresses) {
+            let summary = this.props.vehicles[k];
+            if (summary[0] === lookup) {
+                results.push(k);
+            }
+        }
+
+        this.setState({results: results})
     }
 
     render() {
         return (
             <Layout>
+                <VehicleSearch onLookupChange={lookup => this.search(lookup)}/>
                 <h3>Vehicles</h3>
-                {this.renderVheicles()}
+                <VehicleList
+                    vehicles={this.state.results.length === 0 ? this.props.vehiclesAddresses : this.state.results}/>
             </Layout>
         );
     }

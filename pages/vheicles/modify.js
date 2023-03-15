@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Button, Form, Input, Message} from "semantic-ui-react";
-import Layout from "../../components/Layout";
+import Layout from "../../components/commonComponents/Layout";
 import web3 from "../../ethereum/web3";
 import Vheicle from "../../ethereum/vheicle";
 import {Router} from "../../routes";

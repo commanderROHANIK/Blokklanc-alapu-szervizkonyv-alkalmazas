@@ -1,10 +1,10 @@
 import React, {Component} from "react";
-import Layout from '../../components/Layout';
+import Layout from '../../components/commonComponents/Layout';
 import ServiceCenter from "../../ethereum/serviceCenter";
 import {Button, Card, Grid, Table} from "semantic-ui-react";
 import {Link} from "../../routes";
-import AddEmploye from "../../components/AddEmploye";
-import AlkalmazottRow from "../../components/AlkalmazottRow";
+import AddEmploye from "../../components/employeeComponents/AddEmploye";
+import AlkalmazottRow from "../../components/employeeComponents/AlkalmazottRow";
 
 class ServiceCenterShow extends Component {
     static async getInitialProps(props) {

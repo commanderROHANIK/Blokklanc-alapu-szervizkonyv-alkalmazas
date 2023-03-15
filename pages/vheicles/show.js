@@ -1,9 +1,9 @@
 import React, {Component} from "react";
-import Layout from '../../components/Layout';
+import Layout from '../../components/commonComponents/Layout';
 import Vheicle from "../../ethereum/vheicle";
 import {Button, Card, Grid, Table} from "semantic-ui-react";
-import AddServiceLog from "../../components/AddServiceLog";
-import SzervizLogRow from "../../components/SzervizLogRow"
+import AddServiceLog from "../../components/serviceLogComponents/AddServiceLog";
+import SzervizLogRow from "../../components/serviceLogComponents/SzervizLogRow"
 import {Link} from "../../routes";
 
 class VheicleShow extends Component {
