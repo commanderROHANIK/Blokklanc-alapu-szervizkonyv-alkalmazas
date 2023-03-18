@@ -3,7 +3,7 @@ import factory from "../../ethereum/factory";
 import Layout from "../../components/commonComponents/Layout";
 import Vheicle from "../../ethereum/vheicle";
 import VehicleList from "../../components/vehicleComponents/VehicleList";
-import VehicleSearch from "../../components/vehicleComponents/VehicleSearch";
+import SearchBar from "../../components/commonComponents/SearchBar";
 
 class AllVheicles extends Component {
     state = {
@@ -37,7 +37,8 @@ class AllVheicles extends Component {
     render() {
         return (
             <Layout>
-                <VehicleSearch onLookupChange={lookup => this.search(lookup)}/>
+                <h3>Search</h3>
+                <SearchBar onLookupChange={lookup => this.search(lookup)}/>
                 <h3>Vehicles</h3>
                 <VehicleList
                     vehicles={this.state.results.length === 0 ? this.props.vehiclesAddresses : this.state.results}/>
