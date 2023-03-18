@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Input} from "semantic-ui-react";
 
-class VehicleSearch extends Component {
+class SearchBar extends Component {
     state = {
         lookup: ""
     }
@@ -19,4 +19,4 @@ class VehicleSearch extends Component {
     }
 }
 
-export default VehicleSearch;
+export default SearchBar;
