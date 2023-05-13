@@ -1,4 +1,4 @@
-# szerviz_nyilvantartas
+# Blokklánc-alapú szervízkönyv alkalmazás
 
 Futtatás:
 
