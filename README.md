@@ -14,6 +14,4 @@ Ha szeretnénk újrafordítani az okosszerződéseinket és publikálni őket ak
 
 pl.: "node ethereum/compile.js"
 
-Ezután a szerződésünk új példánya felkerül a használt blokkláncra.
-
-
+Ezután a szerződésünk új példánya felkerül a használt blokkláncra. A deploy szkript futtatásakor kapott azonosítót be kell illesztenünk a factory.js fájlba a használatához.
