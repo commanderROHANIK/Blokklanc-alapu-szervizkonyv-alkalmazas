@@ -18,3 +18,6 @@ Ha szeretnénk újrafordítani az okosszerződéseinket és publikálni őket ak
 pl.: "node ethereum/compile.js"
 
 Ezután a szerződésünk új példánya felkerül a használt blokkláncra. A deploy szkript futtatásakor kapott azonosítót be kell illesztenünk a factory.js fájlba a használatához.
+
+
+A projekt alapértelmezetten a Goerli hálózatra van beállítva, ha ezt szertnénk módosítani, akkor a megfelelőt API kulcsot be kell illesztenünk a web3.js és deploy.js fájlokba, valamint ahogy az előző lépés mutatja közzé kell tennőnk a szerződésünket és frissíteni a factory.js fájlt.
