@@ -10,7 +10,9 @@ Futtatás:
 
 2. Lépjünk a letöltött mappába, majd az "npm install --legacy-peer-deps" parancs kiadásával telepítsük a projekt használatához szükséges függőségeket.
 
-3. Az "npm run dev" parancs kiadásával indítsuk el az alkalmazást. Ezután alapértelmezetten a "http://localhost:3000" címen elérhetővé válik az alkalmazás.
+3. Fordítsuk le és publikáljuk a szerződéseket
+
+4. Az "npm run dev" parancs kiadásával indítsuk el az alkalmazást. Ezután alapértelmezetten a "http://localhost:3000" címen elérhetővé válik az alkalmazás.
 
 Szerződések újra fordítása és publiklása:
 
