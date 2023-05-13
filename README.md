@@ -1,5 +1,8 @@
 # Blokklánc-alapú szervízkönyv alkalmazás
 
+Követelmények:
+ - Node.js
+
 Futtatás:
 
 1. Klónozzuk a projektet a gépünkre.
