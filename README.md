@@ -2,6 +2,7 @@
 
 Követelmények:
  - Node.js
+ - Metamask
 
 Futtatás:
 
@@ -20,4 +21,4 @@ pl.: "node ethereum/compile.js"
 Ezután a szerződésünk új példánya felkerül a használt blokkláncra. A deploy szkript futtatásakor kapott azonosítót be kell illesztenünk a factory.js fájlba a használatához.
 
 
-A projekt alapértelmezetten a Goerli hálózatra van beállítva, ha ezt szertnénk módosítani, akkor a megfelelőt API kulcsot be kell illesztenünk a web3.js és deploy.js fájlokba, valamint ahogy az előző lépés mutatja közzé kell tennőnk a szerződésünket és frissíteni a factory.js fájlt.
+A projekt alapértelmezetten a Goerli hálózatra van beállítva. Ha a Metamaskban másik hálózat van beállítva úgy az alkalmazás hibásan fog működni és hibaüzenetet ad. Ha szertnénk módosítani a hálózatot, akkor a megfelelőt API kulcsot be kell illesztenünk a web3.js és deploy.js fájlokba, valamint ahogy az előző lépés mutatja közzé kell tennőnk a szerződésünket és frissíteni a factory.js fájlt.
