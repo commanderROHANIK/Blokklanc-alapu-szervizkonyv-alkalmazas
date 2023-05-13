@@ -11,7 +11,7 @@ Futtatás:
 
 3. Az "npm run dev" parancs kiadásával indítsuk el az alkalmazást. Ezután alapértelmezetten a "http://localhost:3000" címen elérhetővé válik az alkalmazás.
 
-Szerződések újra fordítása és publiklása
+Szerződések újra fordítása és publiklása:
 
 Ha szeretnénk újrafordítani az okosszerződéseinket és publikálni őket akkor azt az ethereum alkönyvtárban található "compile.js" és "deploy.js" futtatásával tudjuk megtenni.
 
