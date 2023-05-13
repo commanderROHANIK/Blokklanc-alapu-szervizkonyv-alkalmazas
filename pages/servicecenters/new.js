@@ -25,6 +25,8 @@ class AddServiceCenter extends Component {
 
         try {
             const accounts = await web3.eth.getAccounts();
+
+            let tmp = Date.now();
             await factory.methods
                 .createSzerviz(
                     this.state.cim,
@@ -35,6 +37,7 @@ class AddServiceCenter extends Component {
                 .send({
                     from: accounts[0]
                 });
+            console.log(Date.now() - tmp);
 
             Router.replaceRoute(`/`);
         } catch (err) {

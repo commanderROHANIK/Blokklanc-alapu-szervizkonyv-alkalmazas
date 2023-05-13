@@ -55,10 +55,12 @@ class ServiceCenterModify extends Component {
                 tmp_array.push(this.props.serviceCenter.methods.setNyitvatartas(this.state.nyitvatartas));
             }
 
-            await Promise.all(tmp_array.map(x => x.send(
-                {from: accounts[0]}
-            )));
+            let tmp = Date.now();
+            await Promise.all(tmp_array.map(x => x.send({
+                from: accounts[0]
+            })));
 
+            console.log(Date.now() - tmp);
             Router.replaceRoute(`/services/${this.props.address}`);
         } catch (err) {
             this.setState({errorMessage: err.message});

@@ -25,11 +25,15 @@ class AddServiceCenter extends Component {
 
         try {
             const accounts = await web3.eth.getAccounts();
+            let tmp = Date.now();
+
             await factory.methods
                 .createJarmu(this.state.azonosito, this.state.gyarto, this.state.evjarat, this.state.uzemanyag)
                 .send({
                     from: accounts[0]
                 });
+            console.log(Date.now() - tmp);
+
             Router.replaceRoute(`/`);
         } catch (err) {
             this.setState({errorMessage: err.message});

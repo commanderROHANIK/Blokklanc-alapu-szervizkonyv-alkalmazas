@@ -55,9 +55,11 @@ class VheicleModify extends Component {
                 tmp_array.push(this.props.vheicle.methods.setTulajdonos(this.state.tulajdonos));
             }
 
+            let tmp = Date.now();
             await Promise.all(tmp_array.map(x => x.send(
                 {from: accounts[0]}
             )));
+            console.log(Date.now() - tmp);
 
             Router.replaceRoute(`/vheicles/${this.props.address}`);
         } catch (err) {
